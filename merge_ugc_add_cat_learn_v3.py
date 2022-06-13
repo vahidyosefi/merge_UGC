@@ -324,7 +324,7 @@ print(len(tamasha))
 
 frames00 = [aparat_f, didestan, gabeh, mihanvideo , mp4, namasha, namayesh, shabakema, tamasha]
 adgham0 = pd.concat(frames00)
-# adgham0.to_excel(r'D:\python\UGC\sample\adgham00.xlsx', index=False)
+# adgham0.to_excel(r'D:\python\UGC\sample\adgham000.xlsx', index=False)
 print(len(adgham0))
 
 adgham0.dtypes
@@ -345,14 +345,37 @@ learn_ugc1 = adgham0.query("categori == 'آموزشی'")
 learn_ugc2 = adgham0.query("categori == 'آموزش موسیقی'")
 
 
+
 learn_ugc0 = [learn_ugc1, learn_ugc2]
 learn_ugc = pd.concat(learn_ugc0)
+
+# learn_ugc['like_count'] = learn_ugc['like_count'].astype(int)
 
 print('learn :',len(learn_ugc))
 learn_ugc.to_excel(r'D:\python\PowerBI_App_store\progress\test\learn_ugc.xlsx', index=False)
 learn_ugc.to_sql('learn_ugc',con,if_exists='replace', index=False)
 
 
+
+
+adgham0['categori'] = adgham0['categori'].str.replace('بازی\u200c', 'بازی')
+
+game_ugc1 = adgham0.query("categori == 'بازی'")
+game_ugc2 = adgham0.query("categori == 'گیم'")
+
+
+game_ugc0 = [game_ugc1, game_ugc2]
+game_ugc = pd.concat(game_ugc0)
+
+
+
+game_ugc = game_ugc.query("platform != 'جعبه'")
+
+
+
+print('learn :',len(game_ugc))
+game_ugc.to_excel(r'D:\python\PowerBI_App_store\progress\test\game_ugc1.xlsx', index=False)
+game_ugc.to_sql('game_ugc',con,if_exists='replace', index=False)
 
 
 
